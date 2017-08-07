@@ -1,6 +1,3 @@
-#require 'rspec'
-#require 'map'
-#require 'queue'
 require_relative '../stack'
 
 RSpec.describe Stack, '#stack' do
