@@ -1,0 +1,30 @@
+
+Simon
+  #initialize
+    starts the sequence length at 1
+    starts game over as false
+    starts the sequence as an empty array
+  #add_random_color
+    adds one color to the sequence
+    adds a color included in the options
+    adds a random color
+  #take_turn
+    calls #show_sequence and #require_sequence
+    when the game is not over
+      calls #round_success_message
+      increments the sequence length
+  #play
+    calls #take_turn
+    calls #take_turn until the game is over
+    calls #game_over_message and #reset_game if the game is over
+  #show_sequence
+"[]"
+    calls #add_random_color
+  #reset_game
+    resets the sequence length to 1
+    resets game over to false
+    resets the sequence to an empty array
+
+Finished in 0.04776 seconds (files took 0.27483 seconds to load)
+16 examples, 0 failures
+
