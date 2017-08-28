@@ -1,0 +1,6 @@
+
+  test:
+    adapter: postgresql
+    database: music_db_test
+    pool: 5
+    timeout: 5000
