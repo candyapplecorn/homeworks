@@ -1,0 +1,20 @@
+body {
+	border: 2em solid black;
+}
+
+h1 {
+	text-align: center;
+}
+
+button, input {
+	font-size: 5em;
+}
+
+input {
+	width: 100%;
+	display: block;
+}
+
+button {
+	width: 50%;
+}

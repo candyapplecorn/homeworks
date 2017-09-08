@@ -1,6 +1,5 @@
 import React from 'react';
 
-// undo
 // redo
 
 class Calculator extends React.Component {
@@ -8,8 +7,8 @@ class Calculator extends React.Component {
     super(props);
     // your code here
 		this.state = ({
-			num1: 0,
-			num2: 0,
+			num1: '',
+			num2: '',
 			result: '',
 			history: [] // will store n1, n2 and operation
 		})
@@ -24,18 +23,18 @@ class Calculator extends React.Component {
   // your code here
 	setNum1(e){
 		this.setState({ num1: parseInt(e.target.value) })
-		e.target.value = ""
 	}
 
 	setNum2(e){
 		this.setState({ num2: parseInt(e.target.value) })
-		e.target.value = ""
 	}
 
 	calc(op){
 		this.setState({
 			history: this.state.history.concat(Object.assign({}, this.state)),
-			result: this.operators(op.target.value)(this.state.num1, this.state.num2)
+			result: this.operators(op.target.value)(this.state.num1, this.state.num2),
+			num1: '',
+			num2: ''
 		});
 	}
 
@@ -63,20 +62,18 @@ class Calculator extends React.Component {
 
 	renderUndo(){
 		if (this.state.history.length == 0){
-			return <div></div>
+			return <button disabled>Undo</button>
 		}
 
 		return (
-			<div>
 				<button onClick={this.undo}>Undo</button>
-			</div>
 		);
 	}
 
   render() {
     return (
       <div>
-        <h1>Result: {this.state.result}</h1>
+        <h1>Result: <br></br><span>{this.state.result}</span></h1>
 				{' '}
 				<div>
 					<input value={this.state.num1} type="number" id="one" onChange={this.setNum1}></input>
@@ -89,9 +86,8 @@ class Calculator extends React.Component {
 					<button value="*" onClick={this.calc.bind("*")}>*</button>
 					<button value="/" onClick={this.calc.bind("/")}>/</button>
 					<button value="**" onClick={this.calc.bind("**")}>**</button>
+					{this.renderUndo()}
 				</div>
-				{' '}
-				{this.renderUndo()}
       </div>
     );
   }

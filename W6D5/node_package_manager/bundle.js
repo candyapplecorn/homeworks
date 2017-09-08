@@ -22452,7 +22452,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// undo
 // redo
 
 var Calculator = function (_React$Component) {
@@ -22465,8 +22464,8 @@ var Calculator = function (_React$Component) {
 		var _this = _possibleConstructorReturn(this, (Calculator.__proto__ || Object.getPrototypeOf(Calculator)).call(this, props));
 
 		_this.state = {
-			num1: 0,
-			num2: 0,
+			num1: '',
+			num2: '',
 			result: '',
 			history: [] // will store n1, n2 and operation
 		};
@@ -22486,20 +22485,20 @@ var Calculator = function (_React$Component) {
 		key: 'setNum1',
 		value: function setNum1(e) {
 			this.setState({ num1: parseInt(e.target.value) });
-			e.target.value = "";
 		}
 	}, {
 		key: 'setNum2',
 		value: function setNum2(e) {
 			this.setState({ num2: parseInt(e.target.value) });
-			e.target.value = "";
 		}
 	}, {
 		key: 'calc',
 		value: function calc(op) {
 			this.setState({
 				history: this.state.history.concat(Object.assign({}, this.state)),
-				result: this.operators(op.target.value)(this.state.num1, this.state.num2)
+				result: this.operators(op.target.value)(this.state.num1, this.state.num2),
+				num1: '',
+				num2: ''
 			});
 		}
 	}, {
@@ -22545,17 +22544,17 @@ var Calculator = function (_React$Component) {
 		key: 'renderUndo',
 		value: function renderUndo() {
 			if (this.state.history.length == 0) {
-				return _react2.default.createElement('div', null);
+				return _react2.default.createElement(
+					'button',
+					{ disabled: true },
+					'Undo'
+				);
 			}
 
 			return _react2.default.createElement(
-				'div',
-				null,
-				_react2.default.createElement(
-					'button',
-					{ onClick: this.undo },
-					'Undo'
-				)
+				'button',
+				{ onClick: this.undo },
+				'Undo'
 			);
 		}
 	}, {
@@ -22568,7 +22567,12 @@ var Calculator = function (_React$Component) {
 					'h1',
 					null,
 					'Result: ',
-					this.state.result
+					_react2.default.createElement('br', null),
+					_react2.default.createElement(
+						'span',
+						null,
+						this.state.result
+					)
 				),
 				' ',
 				_react2.default.createElement(
@@ -22605,10 +22609,9 @@ var Calculator = function (_React$Component) {
 						'button',
 						{ value: '**', onClick: this.calc.bind("**") },
 						'**'
-					)
-				),
-				' ',
-				this.renderUndo()
+					),
+					this.renderUndo()
+				)
 			);
 		}
 	}]);
