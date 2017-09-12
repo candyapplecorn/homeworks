@@ -9,6 +9,12 @@ const reducer = (state = initialState, action) => {
       const { baseCurrency, rates } = action
       return { baseCurrency, rates };
       break;
+    case ("LOADING_CURRENCY"):
+      return {
+        baseCurrency: `loading ${action.baseCurrency}...`,
+        rates: []
+      }
+      break;
     default:
       return state; // remove this and fill out the body of the reducer function
   }

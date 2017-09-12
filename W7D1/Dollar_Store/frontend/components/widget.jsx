@@ -1,6 +1,6 @@
 import React from 'react';
 import Currency from './currency';
-import selectCurrency from '../actions';
+import { selectCurrency, loadingCurrency } from '../actions';
 
 class Widget extends React.Component {
 
@@ -12,9 +12,14 @@ class Widget extends React.Component {
     this.props.store.subscribe(this.forceUpdate);
     this.currencies = ["USD", "EUR", "CAD", "JPY", "GBP", "CNY"];
     this.selectCurrency = selectCurrency.bind(this);
+    this.loadingCurrency = loadingCurrency.bind(this);
   }
 
   fetchRates(currency) {
+    // Let's dispatch a loading event!
+    this.props.store.dispatch(
+      this.loadingCurrency(currency)
+    );
     $.ajax({
       url: `http://api.fixer.io/latest?base=${currency}`,
       type: "GET",
