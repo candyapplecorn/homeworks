@@ -8,10 +8,6 @@ import { fetchSearchGiphys, RECEIVE_SEARCH_GIPHYS, receiveSearchGiphys } from '.
 
 document.addEventListener('DOMContentLoaded', function(){
     const store = configureStore();
-    window.store = store;
-    window.APIUtils = APIUtils;
-    window.RECEIVE_SEARCH_GIPHYS = RECEIVE_SEARCH_GIPHYS;
-    window.receiveSearchGiphys = receiveSearchGiphys;
-    window.fetchSearchGiphys = fetchSearchGiphys;
-
+    const root =  document.getElementById('root');
+    ReactDOM.render(<Root store={store} />, root)
 });

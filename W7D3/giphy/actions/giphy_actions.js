@@ -8,7 +8,6 @@ export const receiveSearchGiphys = giphys => ({
   });
 
 export const fetchSearchGiphys = searchTerm => dispatch => {
-    debugger
   return APIUtil.fetchSearchGiphys(searchTerm)
          .then(giphys => dispatch(receiveSearchGiphys(giphys.data)));
 }
